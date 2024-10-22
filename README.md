@@ -16,7 +16,6 @@ This project implements a **Semantic Search System** using **spaCy**, an advance
 - **spaCy**: The NLP library for processing and understanding text.
 - **Flask**: The web framework used for developing the web application.
 - **HTML/CSS/JavaScript**: Technologies used for the front-end development.
-- **Tiiny.host or Azure**: Platforms used for hosting the application.
 
 ## Installation
 
