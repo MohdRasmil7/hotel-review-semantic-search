@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Review Semantic Search</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .search-container {
+        margin: 20px 0;
+      }
+      #query {
+        width: 70%;
+        padding: 10px;
+        font-size: 16px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .result-card {
+        margin: 15px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .positive {
+        background-color: #e8f5e9;
+        border-left: 4px solid #4caf50;
+      }
+      .negative {
+        background-color: #ffebee;
+        border-left: 4px solid #f44336;
+      }
+      .similarity-score {
+        color: #007bff;
+        font-weight: bold;
+      }
+      .sentiment-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: bold;
+        margin-left: 10px;
+      }
+      .sentiment-positive {
+        background-color: #4caf50;
+        color: white;
+      }
+      .sentiment-negative {
+        background-color: #f44336;
+        color: white;
+      }
+      .loading {
+        display: none;
+        margin: 20px 0;
+        text-align: center;
+        color: #666;
+      }
+      .error {
+        color: red;
+        font-weight: bold;
+      }
+      .stats {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hotel Review Semantic Search</h1>
+
+    <div class="stats" id="statsContainer">Loading statistics...</div>
+
+    <div class="search-container">
+      <form id="searchForm" method="POST">
+        <input
+          type="text"
+          id="query"
+          name="query"
+          placeholder="Enter your search query (e.g., 'great location and friendly staff')"
+          required
+        />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+
+    <div id="loading" class="loading">Searching for similar reviews...</div>
+
+    <div id="results"></div>
+
+    <script>
+      // Load statistics on page load
+      fetch('/stats')
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            document.getElementById(
+              'statsContainer'
+            ).innerHTML = `<p class="error">Error loading statistics: ${data.error}</p>`
+          } else {
+            document.getElementById('statsContainer').innerHTML = `
+                        <h3>Dataset Statistics</h3>
+                        <p>Total Reviews: ${data.total_reviews}</p>
+                        <p>Positive Reviews: ${data.positive_reviews}</p>
+                        <p>Negative Reviews: ${data.negative_reviews}</p>
+                    `
+          }
+        })
+        .catch((error) => {
+          document.getElementById(
+            'statsContainer'
+          ).innerHTML = `<p class="error">Error loading statistics: ${error}</p>`
+        })
+
+      document.getElementById('searchForm').onsubmit = function (e) {
+        e.preventDefault()
+        const query = document.getElementById('query').value
+        const loadingDiv = document.getElementById('loading')
+        const resultsDiv = document.getElementById('results')
+
+        loadingDiv.style.display = 'block'
+        resultsDiv.innerHTML = ''
+
+        fetch('/search', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `query=${encodeURIComponent(query)}`,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            loadingDiv.style.display = 'none'
+
+            if (data.error) {
+              resultsDiv.innerHTML = `<p class="error">Error: ${data.error}</p>`
+            } else {
+              resultsDiv.innerHTML = `<h2>Top Similar Reviews:</h2>`
+              data.results.forEach((result) => {
+                const similarityPercentage = (result.similarity * 100).toFixed(
+                  1
+                )
+                const sentimentClass =
+                  result.sentiment === 'Pos' ? 'positive' : 'negative'
+                const sentimentText =
+                  result.sentiment === 'Pos' ? 'Positive' : 'Negative'
+                resultsDiv.innerHTML += `
+                            <div class="result-card ${sentimentClass}">
+                                <p class="similarity-score">
+                                    Similarity: ${similarityPercentage}%
+                                    <span class="sentiment-badge sentiment-${sentimentClass.toLowerCase()}">${sentimentText}</span>
+                                </p>
+                                <p><strong>Review:</strong> ${result.review}</p>
+                            </div>
+                        `
+              })
+            }
+          })
+          .catch((error) => {
+            loadingDiv.style.display = 'none'
+            resultsDiv.innerHTML = `<p class="error">Error: ${error}</p>`
+          })
+      }
+    </script>
+  </body>
+</html>
