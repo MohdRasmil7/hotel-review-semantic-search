@@ -64,8 +64,4 @@ This project showcases the capabilities of spaCy in building a semantic search t
 - [Flask Documentation](https://flask.palletsprojects.com/)
 
 
-## Customization
-
-- Replace placeholders like `[Link to your GitHub repository]`, `[your_hosted_link]`, and `[your_demo_video_link]` with actual links.
-- Adjust any features or sections to better match your project specifics.
 
