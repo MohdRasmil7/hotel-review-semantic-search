@@ -1,65 +1,71 @@
-# Technical Document for Semantic Search System
+# Semantic Search System
 
-## 1. Introduction
+## Overview
 
-This document outlines the development and deployment of a semantic search system using spaCy, a powerful NLP toolkit. The system allows users to perform semantic searches, retrieving relevant results based on the meaning of queries rather than exact keyword matches.
+This project implements a **Semantic Search System** using **spaCy**, an advanced natural language processing library in Python. The application allows users to perform semantic searches, retrieving relevant results based on the meaning of their queries.
 
-## 2. Approach
+## Features
 
-### 2.1. Tool and Libraries
+- **Semantic Search**: Users can input queries, and the system retrieves results that are contextually relevant.
+- **User-Friendly Interface**: A clean and simple front-end for easy interaction with the tool.
+- **Fast and Efficient**: Utilizes spaCy’s powerful NLP capabilities for quick processing.
 
-- **Language Model**: spaCy (e.g., `en_core_web_md` for word vectors)
-- **Framework**: Flask for web hosting
-- **Database**: (if applicable, mention any database used)
+## Technologies Used
 
-### 2.2. Implementation Steps
+- **Python**: The programming language used for backend development.
+- **spaCy**: The NLP library for processing and understanding text.
+- **Flask**: The web framework used for developing the web application.
+- **HTML/CSS/JavaScript**: Technologies used for the front-end development.
+- **Tiiny.host or Azure**: Platforms used for hosting the application.
 
-1. **Data Preparation**: 
-   - Collected and preprocessed the dataset to ensure consistency and quality.
-   - Used spaCy for tokenization, lemmatization, and vectorization of text data.
+## Installation
 
-2. **Semantic Search Logic**: 
-   - Implemented a function to compute cosine similarity between the user's query and the indexed documents.
-   - Retrieved the top N most relevant results based on similarity scores.
+To run this project locally, follow these steps:
 
-3. **Web Interface**: 
-   - Developed a simple web interface using Flask, allowing users to input queries and view results.
+1. **Clone the repository**:
+   ```bash
+   git clone [Link to your GitHub repository]
+   ```
 
-## 3. Hosting
+2. **Navigate to the project directory**:
+   ```bash
+   cd semantic-search-system
+   ```
 
-### 3.1. Hosting Platform
+3. **Install the required packages**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-The application is hosted on [Azure/Tiiny.host] (choose one based on your assignment). 
+4. **Run the application**:
+   ```bash
+   python app.py
+   ```
 
-### 3.2. Deployment Steps
+5. **Open your browser and go to**: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
-1. **Environment Setup**: 
-   - Created a virtual environment and installed required libraries using `pip install -r requirements.txt`.
+## Usage
 
-2. **Application Configuration**: 
-   - Configured the application to run on the specified port.
+1. Enter your query in the input box.
+2. Click on the "Search" button.
+3. The system will return relevant results based on the meaning of your query.
 
-3. **Deployment**: 
-   - Deployed the application on [Azure/Tiiny.host], following the platform's guidelines for deployment.
+## Challenges Faced
 
-4. **Access Link**: 
-   - The application can be accessed at: [your hosted link].
+- **Understanding spaCy**: Initially, there was a learning curve in understanding how to effectively utilize spaCy for semantic searching.
+- **Performance Optimization**: Ensuring the search results were returned quickly and accurately required several iterations of testing and refining the model.
 
-## 4. Challenges Faced
+## Conclusion
 
-- **Model Selection**: Choosing the appropriate spaCy model for semantic similarity that balances performance and accuracy.
-- **Data Quality**: Ensuring the dataset was clean and well-structured, which required extensive preprocessing.
-- **Hosting Issues**: Encountered challenges with environment configuration on [Azure/Tiiny.host], particularly with dependency management and server setup.
+This project showcases the capabilities of spaCy in building a semantic search tool. It provides a foundation for further enhancements, such as adding more complex query processing or integrating machine learning models for better accuracy.
 
-## 5. Conclusion
+## Acknowledgements
 
-The semantic search system successfully retrieves relevant information based on semantic understanding. This project demonstrates the capabilities of spaCy and the effectiveness of NLP techniques in enhancing search functionalities.
+- [spaCy Documentation](https://spacy.io/usage)
+- [Flask Documentation](https://flask.palletsprojects.com/)
 
----
 
-### 6. Submission Checklist
-
-- **Code**: [https://github.com/MohdRasmil7/hotel-review-semantic-search]
-- **Hosted Link**: [hotel-review-semantic-search-dcafc6c2fgcwd3c8.canadacentral-01.azurewebsites.net]
-- **Demo Video**: [[Link to the demo video](https://drive.google.com/file/d/1g9uUNE6PmCKIJ6-Jd6Odwuot5YR-UYsf/view?usp=sharing)]
+### Customization
+- Replace placeholders like `[Link to your GitHub repository]`, `[your_hosted_link]`, and `[your_demo_video_link]` with actual links.
+- Adjust any features or sections to better match your project specifics.
 
