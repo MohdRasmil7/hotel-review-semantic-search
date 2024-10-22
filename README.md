@@ -61,5 +61,5 @@ The semantic search system successfully retrieves relevant information based on 
 
 - **Code**: [https://github.com/MohdRasmil7/hotel-review-semantic-search]
 - **Hosted Link**: [hotel-review-semantic-search-dcafc6c2fgcwd3c8.canadacentral-01.azurewebsites.net]
-- **Demo Video**: [Link to the demo video]
+- **Demo Video**: [[Link to the demo video](https://drive.google.com/file/d/1g9uUNE6PmCKIJ6-Jd6Odwuot5YR-UYsf/view?usp=sharing)]
 
